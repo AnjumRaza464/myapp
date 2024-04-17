@@ -1,16 +1,15 @@
-import Footer from "../components/Footer"
-import Header from "../components/Header"
+
 import Main from "../components/Main"
 
 
 
-const Home = ({Products}) => {
+const Home = () => {
     
   return (
     <>
-        <Header />
-        <Main Products={Products} />
-        <Footer />
+        
+        <Main/>
+        
     </>
   )
 }

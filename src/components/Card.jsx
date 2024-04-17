@@ -1,14 +1,14 @@
 
 
-const Card = ({product}) => {
+const Card = () => {
   return (
     <div className="col-md-3">
     <div className="card" >
-  <img src={product.image} className="card-img-top" alt="..." />
+  <img src="" className="card-img-top" alt="..." />
   <div className="card-body">
-    <h5 className="card-title">{product.title}</h5>
-    <p className="card-text">{product.name}</p>
-    <a href="#" className="btn btn-primary">{product.price}</a>
+    <h5 className="card-title"></h5>
+    <p className="card-text"></p>
+    <a href="#" className="btn btn-primary"></a>
   </div>
 </div>
 </div>

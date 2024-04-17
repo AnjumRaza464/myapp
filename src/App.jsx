@@ -1,31 +1,35 @@
-import Home from "./pages/Home"
 
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home"
+import { createBrowserRouter, createRoutesFromElements,RouterProvider,Route} from "react-router-dom";
+import Layout from "./pages/Layout";
+import NotFound from "./pages/NotFound";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<Layout />} >
+
+      <Route path="" element={<Home />} />
+      <Route path="/About" element={<About/>} />
+      <Route path="/Contact" element={<Contact />} />
+      
+      </Route>
+      <Route path="*" element={<NotFound />} />
+
+    </Route>
+
+  )
+);
 
 function App() {
-  let Products = [
-    {
-      title: "Title One" ,
-      name: "Product 1",
-      price: 100,
-      image : "images/bucket.png",
-    },
-    {
-      title: "Title Two" ,
-      name: "Product 2",
-      price: 200,
-      image : "images/combo.png",
-    },
-    {
-      title: "Title Three" ,
-      name: "Product 3",
-      price: 300,
-      image : "images/combo.png",
-    }
-  ]
+  
+  
 
   return (
     <>
-      <Home Products={Products} />
+      <RouterProvider router={router} />
     </>
   )
 }
