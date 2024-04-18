@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import { createBrowserRouter, createRoutesFromElements,RouterProvider,Route} from "react-router-dom";
 import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
+import EditContact from "./pages/EditContact";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
       <Route path="" element={<Home />} />
       <Route path="/About" element={<About/>} />
       <Route path="/Contact" element={<Contact />} />
+      <Route path="/edit/:id" element={<EditContact />} />
       
       </Route>
       <Route path="*" element={<NotFound />} />

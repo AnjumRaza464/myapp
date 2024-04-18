@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-  
 
-
-function Contact ()  {
+  function Contact ()  {
   const notify = () => toast("Data has been saved!");
   const [contact,setContact]=useState({
     fullname:"",
@@ -14,7 +13,13 @@ function Contact ()  {
   const [contacts, setContacts] = useState([])
    const handleSubmit=(e)=>{
     e.preventDefault();
-    contacts.push(contact)
+    /////
+    let newContact = {
+      ...contact,
+      id: Date.now()
+    }
+    contacts.push(newContact)
+    /////
     localStorage.setItem("contact",JSON.stringify(contacts))
     notify()
     setContact({
@@ -30,7 +35,11 @@ function Contact ()  {
     }
 
   }, []);
-
+  const handleDelete = (id) =>{
+    let contactArr = JSON.parse(localStorage.getItem("contact"))
+    let filteredArr = contactArr.filter(contact => contact.id != id)
+    localStorage.setItem("contact", JSON.stringify(filteredArr))
+  }
   return (
     <div className="container">
      
@@ -68,8 +77,8 @@ function Contact ()  {
         <td>{item.fullname}</td>
         <td>{item.email}</td>
         <td>
-          <button className="btn btn-danger me-2"><i className="bi bi-trash3-fill"></i></button>
-        <button className="btn btn-warning me-2"><i className="bi bi-pencil"></i></button>
+          <button className="btn btn-danger me-2" onClick={()=>handleDelete(item.id)}><i className="bi bi-trash3-fill"></i></button>
+        <Link to={`/edit/${item.id}`} className="btn btn-warning me-2"><i className="bi bi-pencil"></i></Link>
         <button className="btn btn-success me-2"><i className="bi bi-telephone-inbound"></i></button>
         </td>  
       </tr>
@@ -85,6 +94,102 @@ function Contact ()  {
 }
 
 export default Contact
+
+
+
+// import { useEffect, useState } from "react"
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+//   function Contact ()  {
+//   const notify = () => toast("Data has been saved!");
+//   const [contact,setContact]=useState({
+//     fullname:"",
+//     email:""
+//   })
+
+//   const [contacts, setContacts] = useState([])
+//    const handleSubmit=(e)=>{
+//     e.preventDefault();
+//     contacts.push(contact)
+//     localStorage.setItem("contact",JSON.stringify(contacts))
+//     notify()
+//     setContact({
+//     fullname:"",
+//     email:""
+//  })
+// }
+//   useEffect(() => {
+//     let storedContacts = localStorage.getItem("contact")
+//     storedContacts = JSON.parse(storedContacts)
+//     if(storedContacts != null){
+//       setContacts(storedContacts)
+//     }
+
+//   }, []);
+
+//   return (
+//     <div className="container">
+     
+
+// <form className="row g-3 w-50" onSubmit={handleSubmit}>
+//   <div className="col-md-12">
+//     <label htmlFor="fullname" className="form-label">Full Name</label>
+//     <input type="text" onChange={(event)=>setContact({...contact,fullname:event.target.value})} value={contact.fullname} className="form-control" id="fullname" />
+//   </div>
+//   <div className="col-md-12">
+//     <label htmlFor="email" className="form-label">Email</label>
+//     <input type="text" onChange={(event)=>setContact({...contact,email:event.target.value})} value={contact.email} className="form-control" id="email" />
+//   </div>
+  
+// <div className="col-12">
+//     <button type="submit" className="btn btn-primary">Sign in</button>
+//   </div>
+// </form>
+
+// <table className="table">   
+// <thead>
+//     <tr>
+//       <th scope="col">#</th>
+//       <th scope="col">fullName</th>
+//       <th scope="col">Email</th>
+//       <th scope="col">Actions</th>
+//     </tr>
+//   </thead>
+//   <tbody> {
+//   contacts.length < 1 ? <tr><td><h1>Data not found</h1></td></tr>:
+//   contacts.map((item,index)=>{
+//     return(
+//       <tr key={index}>
+//         <th scope="row">{index+1}</th>
+//         <td>{item.fullname}</td>
+//         <td>{item.email}</td>
+//         <td>
+//           <button className="btn btn-danger me-2"><i className="bi bi-trash3-fill"></i></button>
+//         <button className="btn btn-warning me-2"><i className="bi bi-pencil"></i></button>
+//         <button className="btn btn-success me-2"><i className="bi bi-telephone-inbound"></i></button>
+//         </td>  
+//       </tr>
+//     )
+//   })
+// }
+//  </tbody>
+//   <ToastContainer />
+// </table>
+        
+//     </div>
+//   )
+// }
+
+// export default Contact
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////***************************************//////////////////////////////////
+
+
+
+
+
 
 // import React, { useEffect, useState } from "react"
 
