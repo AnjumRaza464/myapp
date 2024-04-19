@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addToContacts } from "../features/contact/contactSlice";
 
   function Contact ()  {
+    const dispatch = useDispatch()
   const notify = () => toast("Data has been saved!");
   const [contact,setContact]=useState({
     fullname:"",
@@ -18,9 +21,11 @@ import 'react-toastify/dist/ReactToastify.css';
       ...contact,
       id: Date.now()
     }
-    contacts.push(newContact)
+    //console.log(newContact)
+    dispatch(addToContacts(newContact)) //action k andar jo hum parameter dety hai ussy hum payload kehty hai
+    //contacts.push(newContact)
     /////
-    localStorage.setItem("contact",JSON.stringify(contacts))
+    //localStorage.setItem("contact",JSON.stringify(contacts))
     notify()
     setContact({
     fullname:"",
@@ -55,7 +60,7 @@ import 'react-toastify/dist/ReactToastify.css';
   </div>
   
 <div className="col-12">
-    <button type="submit" className="btn btn-primary">Sign in</button>
+    <button type="submit" className="btn btn-primary">Add to contact</button>
   </div>
 </form>
 
@@ -68,8 +73,9 @@ import 'react-toastify/dist/ReactToastify.css';
       <th scope="col">Actions</th>
     </tr>
   </thead>
-  <tbody> {
-  contacts.length < 1 ? <tr><td><h1>Data not found</h1></td></tr>:
+  <tbody> 
+  {
+  contacts.length < 1 ? <tr><td><p>Data not found</p></td></tr>:
   contacts.map((item,index)=>{
     return(
       <tr key={index}>

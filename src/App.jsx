@@ -6,6 +6,7 @@ import { createBrowserRouter, createRoutesFromElements,RouterProvider,Route} fro
 import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
 import EditContact from "./pages/EditContact";
+import { Formik } from "./pages/Formik";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path="/About" element={<About/>} />
       <Route path="/Contact" element={<Contact />} />
       <Route path="/edit/:id" element={<EditContact />} />
+      <Route path="/formik" element={<Formik/>} />
       
       </Route>
       <Route path="*" element={<NotFound />} />
